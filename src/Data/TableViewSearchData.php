@@ -46,7 +46,7 @@ class TableViewSearchData implements Searchable
             [$relationship, $field] = explode('.', $relationalValue);
 
             $query->orWhereHas($relationship, static function ($query) use ($value, $field) {
-                $query->where($field, 'like', "%{$value}%");
+                $query->where($field, 'ilike', "%{$value}%");
             });
         }
     }
@@ -59,7 +59,7 @@ class TableViewSearchData implements Searchable
     private function applyRegularFields(array $regularFields, $query, string $value): void
     {
         foreach ($regularFields as $field) {
-            $query->orWhere($field, 'like', "%{$value}%");
+            $query->orWhere($field, 'ilike', "%{$value}%");
         }
     }
 }
